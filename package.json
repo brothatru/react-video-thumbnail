@@ -1,0 +1,28 @@
+{
+  "name": "react-thumbnail-generator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Create a thumbnail by providing a video url",
+  "author": "brothatru",
+  "license": "ISC",
+  "keywords": [
+    "react",
+    "thumbnail",
+    "thumnail",
+    "generator",
+    "creator",
+    "generate",
+    "create"
+  ],
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
