@@ -2,7 +2,16 @@
  * https://stackoverflow.com/a/36883038/4364074
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './video-thumbnail.css';
+
+const ThumbnailImage = ({snapshot}) => {
+    return (
+        <div className="react-thumbnail-generator" >
+            <img src={snapshot} alt="my video thumbnail" />
+        </div>
+    )
+}
 
 export default class VideoThumbnail extends React.Component {
     constructor(props) {
@@ -42,11 +51,7 @@ export default class VideoThumbnail extends React.Component {
             )
         } else {
             if (renderThumbnail) {
-                return (
-                    <div className="react-thumbnail-generator" >
-                        <img id="imageEl" ref="imageEl" src={snapshot} />
-                    </div>
-                )
+                return <ThumbnailImage snapshot={snapshot} />;
             } else {
                 return null;
             }
@@ -63,14 +68,18 @@ export default class VideoThumbnail extends React.Component {
         for (let prop in nextProps) {
             if (nextProps[prop] !== this.props[prop]) {
                 data[prop] = nextProps[prop];
-                !stateChanged ? stateChanged = true : "";
+                if (!stateChanged) {
+                    stateChanged = true;
+                }
             }
         }
-        stateChanged ? this.setState(data) : "";
+        if (stateChanged) {
+            this.setState(data);
+        }
     }
 
     componentDidMount() {
-        // this.refs.videoEl.setAttribute('crossOrigin', 'anonymous');
+        // this.refs.videoEl.setAttribute('crossOrigin', 'Anonymous');
         console.log('mount state: ', this.state)
     }
 
@@ -85,7 +94,7 @@ export default class VideoThumbnail extends React.Component {
             // check if all 3 required events fired
             if (metadataLoaded && dataLoaded && suspended) {
                 if (!this.refs.videoEl.currentTime || this.refs.videoEl.currentTime < this.state.snapshotAtTime) {
-                    this.refs.videoEl.currentTime = this.state.snapshotAtTime;
+                    this.refs.videoEl.currentTime = snapshotAtTime;
                 }
 
                 if (seeked && !snapshot) {
@@ -111,11 +120,25 @@ export default class VideoThumbnail extends React.Component {
             })
             
             // pass the thumbnail url back to parent component's thumbnail handler (if any)
-            this.state.thumbnailHandler ? this.state.thumbnailHandler(thumbnail) : "";
+            if (this.state.thumbnailHandler) {
+                this.state.thumbnailHandler(thumbnail);
+            }
 
         } catch (e) {
             console.log(e);
         }
     }
 
+}
+
+VideoThumbnail.propTypes = {
+    renderThumbnail: PropTypes.bool,
+    snapshotAtTime: PropTypes.number,
+    thumbnailHandler: PropTypes.func,
+    videoUrl: PropTypes.string.isRequired,
+}
+
+VideoThumbnail.defaultProps = {
+    renderThumbnail: true,
+    snapshotAtTime: 2,
 }
