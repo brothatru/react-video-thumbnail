@@ -1,19 +1,25 @@
-/*
- * https://stackoverflow.com/a/36883038/4364074
+/**
+ * React Video Thumbnail Component
+ * @author mike trieu
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './video-thumbnail.css';
 
-const ThumbnailImage = ({snapshot}) => {
+/**
+ * Simple component that renders thumbnail url
+ * @param {string} snapshot
+ */
+const ThumbnailImage = ({ snapshot }) => {
     return (
         <div className="react-thumbnail-generator" >
             <img src={snapshot} alt="my video thumbnail" />
         </div>
-    )
+    );
 }
 
 export default class VideoThumbnail extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -35,7 +41,6 @@ export default class VideoThumbnail extends React.Component {
         if (!snapshot) {
             return (
                 <div className="react-thumbnail-generator" >
-                    <h1>Thumbnail Generator</h1>
                     <canvas className="snapshot-generator" ref="canvas" ></canvas>
                     <video muted
                         className="snapshot-generator"
@@ -58,7 +63,7 @@ export default class VideoThumbnail extends React.Component {
         }
     }
 
-    /* 
+    /*
     * React Lifecycle Hook
     * Update any props that may have changed
     */
@@ -79,7 +84,7 @@ export default class VideoThumbnail extends React.Component {
     }
 
     componentDidMount() {
-        // this.refs.videoEl.setAttribute('crossOrigin', 'Anonymous');
+        this.refs.videoEl.setAttribute('crossOrigin', 'Anonymous');
         console.log('mount state: ', this.state)
     }
 
@@ -105,32 +110,38 @@ export default class VideoThumbnail extends React.Component {
         }
     }
 
-    getSnapShot() {
-        const video = this.refs.videoEl;
-        const canvas = this.refs.canvas;
-        canvas.height = video.videoHeight;
-        canvas.width = video.videoWidth;
-        canvas.getContext('2d').drawImage(video, 0, 0);
-
+    /**
+     * Create a canvas and video element to "draw" the
+     * image, then convert it to a data url
+     */
+    getSnapShot = () => {
+        console.log('attempting to get snapshot...')
         try {
+            const video = this.refs.videoEl;
+            const canvas = this.refs.canvas;
+            canvas.height = video.videoHeight;
+            canvas.width = video.videoWidth;
+            canvas.getContext('2d').drawImage(video, 0, 0);
             const thumbnail = canvas.toDataURL('image/png');
 
             this.setState({
                 snapshot: thumbnail
             })
-            
+
             // pass the thumbnail url back to parent component's thumbnail handler (if any)
             if (this.state.thumbnailHandler) {
                 this.state.thumbnailHandler(thumbnail);
             }
 
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
-
 }
 
+/**
+ * Property Types
+ */
 VideoThumbnail.propTypes = {
     renderThumbnail: PropTypes.bool,
     snapshotAtTime: PropTypes.number,
@@ -138,6 +149,9 @@ VideoThumbnail.propTypes = {
     videoUrl: PropTypes.string.isRequired,
 }
 
+/**
+ * Default Properties
+ */
 VideoThumbnail.defaultProps = {
     renderThumbnail: true,
     snapshotAtTime: 2,

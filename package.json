@@ -1,6 +1,7 @@
 {
   "name": "react-thumbnail-generator",
   "version": "0.1.0",
+  "main": "src/index.js",
   "private": true,
   "description": "Create a thumbnail by providing a video url",
   "author": "brothatru",
@@ -15,15 +16,31 @@
     "create"
   ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "file-loader": "^1.1.11",
+    "image-webpack-loader": "^4.2.0",
     "jest": "^22.4.3",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "node-sass": "^4.8.3",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.14"
   },
   "scripts": {
-    "start": "",
-    "build": "",
-    "test": ""
+    "start": "webpack --progress --mode development --watch --output ./example/dist/main.js",
+    "build": "webpack --progress --mode production --output ./example/dist/main.js",
+    "test": "jest"
   }
 }
