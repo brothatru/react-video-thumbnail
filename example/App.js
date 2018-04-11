@@ -10,6 +10,8 @@ class App extends Component {
                 <VideoThumbnail
                     videoUrl="https://dl.dropboxusercontent.com/s/7b21gtvsvicavoh/statue-of-admiral-yi-no-audio.mp4?dl=1"
                     thumbnailHandler={(thumbnail) => console.log(thumbnail)}
+                    width={250}
+                    height={150}
                     />
             </div>
         );

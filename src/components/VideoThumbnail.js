@@ -29,10 +29,13 @@ export default class VideoThumbnail extends React.Component {
             snapshot: false,        // string thumbnail url || false
             suspended: false,       // boolean
             // props
-            renderThumbnail: props.renderThumbnail,    // boolean
-            snapshotAtTime: props.snapshotAtTime,      // number
-            thumbnailHandler: props.thumbnailHandler,  // callback function
-            videoUrl: props.videoUrl,                  // string
+            cors: props.cors,                           // boolean
+            width: props.width,                         // number
+            height: props.height,                       // number
+            renderThumbnail: props.renderThumbnail,     // boolean
+            snapshotAtTime: props.snapshotAtTime,       // number
+            thumbnailHandler: props.thumbnailHandler,   // callback function
+            videoUrl: props.videoUrl,                   // string
         }
     }
 
@@ -84,8 +87,8 @@ export default class VideoThumbnail extends React.Component {
     }
 
     componentDidMount() {
-        this.refs.videoEl.setAttribute('crossOrigin', 'Anonymous');
-        console.log('mount state: ', this.state)
+        if (!this.state.cors) this.refs.videoEl.setAttribute('crossOrigin', 'Anonymous');
+        // console.log('mount state: ', this.state)
     }
 
     /*
@@ -115,13 +118,20 @@ export default class VideoThumbnail extends React.Component {
      * image, then convert it to a data url
      */
     getSnapShot = () => {
-        console.log('attempting to get snapshot...')
         try {
+            const { width, height } = this.props;
             const video = this.refs.videoEl;
             const canvas = this.refs.canvas;
             canvas.height = video.videoHeight;
             canvas.width = video.videoWidth;
-            canvas.getContext('2d').drawImage(video, 0, 0);
+
+            // check if we should resize thumbnail
+            if (!width || !height) {
+                canvas.getContext('2d').drawImage(video, 0, 0);
+            } else {
+                canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+            }
+
             const thumbnail = canvas.toDataURL('image/png');
 
             this.setState({
@@ -143,6 +153,9 @@ export default class VideoThumbnail extends React.Component {
  * Property Types
  */
 VideoThumbnail.propTypes = {
+    cors: PropTypes.bool,
+    width: PropTypes.number,
+    height: PropTypes.number,
     renderThumbnail: PropTypes.bool,
     snapshotAtTime: PropTypes.number,
     thumbnailHandler: PropTypes.func,
@@ -153,6 +166,7 @@ VideoThumbnail.propTypes = {
  * Default Properties
  */
 VideoThumbnail.defaultProps = {
+    cors: false,
     renderThumbnail: true,
     snapshotAtTime: 2,
 }
