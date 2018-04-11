@@ -125,7 +125,7 @@ export default class VideoThumbnail extends React.Component {
             canvas.height = video.videoHeight;
             canvas.width = video.videoWidth;
 
-            // check if we should resize thumbnail
+            // resize thumbnail or no ?
             if (!width || !height) {
                 canvas.getContext('2d').drawImage(video, 0, 0);
             } else {
