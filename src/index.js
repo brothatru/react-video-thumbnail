@@ -2,6 +2,6 @@
  * src/index.js
  * @author mike trieu
  */
-import VideoThumnail from './components/VideoThumbnail';
+import VideoThumbnail from './components/VideoThumbnail';
 
-export default VideoThumnail;
+export default VideoThumbnail;
