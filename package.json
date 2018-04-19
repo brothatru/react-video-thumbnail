@@ -1,7 +1,7 @@
 {
   "name": "react-video-thumbnail",
-  "version": "0.1.1",
-  "main": "src/index.js",
+  "version": "0.1.3",
+  "main": "dist/bundle.js",
   "description": "Create a thumbnail by providing a video url",
   "author": "brothatru",
   "license": "ISC",
