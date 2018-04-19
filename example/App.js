@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import VideoThumbnail from '../src/components/VideoThumbnail'; // use npm published version
+import VideoThumbnail from '../dist/bundle.js';
 
 class App extends Component {
     render() {
@@ -12,7 +12,7 @@ class App extends Component {
                     thumbnailHandler={(thumbnail) => console.log(thumbnail)}
                     width={360}
                     height={240}
-                    snapshotAtTime={2}
+                    snapshotAtTime={1}
                     />
             </div>
         );

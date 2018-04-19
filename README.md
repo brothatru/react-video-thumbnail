@@ -24,7 +24,7 @@ npm install --save-dev react-video-thumbnail
 ## Usage
 
 ```es6
-import VideoThumbnail from '../src/components/VideoThumbnail'; // use npm published version
+import VideoThumbnail from 'react-video-thumbnail'; // use npm published version
 ...
 <VideoThumbnail
     videoUrl="https://dl.dropboxusercontent.com/s/7b21gtvsvicavoh/statue-of-admiral-yi-no-audio.mp4?dl=1"
