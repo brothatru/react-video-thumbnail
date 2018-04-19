@@ -1,5 +1,5 @@
 {
-  "name": "react-thumbnail-generator",
+  "name": "react-video-thumbnail",
   "version": "0.1.0",
   "main": "src/index.js",
   "description": "Create a thumbnail by providing a video url",
