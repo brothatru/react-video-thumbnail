@@ -66,8 +66,7 @@ export default class VideoThumbnail extends React.Component {
         }
     }
 
-    /*
-    * React Lifecycle Hook
+    /**
     * Update any props that may have changed
     */
     componentWillReceiveProps(nextProps) {
@@ -91,8 +90,7 @@ export default class VideoThumbnail extends React.Component {
         // console.log('mount state: ', this.state)
     }
 
-    /*
-     * React Lifecycle Hook:
+    /**
      * (fires every time setState() gets called)
      */
     componentDidUpdate(prevProps, prevState) {
@@ -133,6 +131,11 @@ export default class VideoThumbnail extends React.Component {
             }
 
             const thumbnail = canvas.toDataURL('image/png');
+
+            // Remove video & canvas elements (no longer needed)
+            video.src = "";  // setting to empty string stops video from loading
+            video.remove();
+            canvas.remove();
 
             this.setState({
                 snapshot: thumbnail

@@ -37,15 +37,17 @@ import VideoThumbnail from '../src/components/VideoThumbnail'; // use npm publis
 
 ## Properties
 
-| Prop Name | Type | Description |
-| --- | --- | --- |
-| **videoUrl** (Required) | **string** | The url of the video you want to generate a thumbnail from |
-| **cors** | **bool** | Whether or not to set **crossOrigin** attribute to **anonymous** |
-| **height** | **int** | Resize thumbnail to specified height |
-| **renderThumbnail** | **bool** | Whether to render an image tag and show the thumbnail or not |
-| **snapshotAtTime** | **int** | The second at which the component should snap the image at |
-| **thumbnailHandler** | **func** | Callback function that takes in **thumbnail** url as an argument |
-| **width** | **int** | Resize thumbnail to specified width |
+| Prop Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| **videoUrl** (Required) | **string** | | The url of the video you want to generate a thumbnail from |
+| **cors** | **bool** | false |Whether or not to set **crossOrigin** attribute to **anonymous**. |
+| **height** | **int** | | Resize thumbnail to specified height |
+| **renderThumbnail** | **bool** | true | Whether to render an image tag and show the thumbnail or not. |
+| **snapshotAtTime** | **int** | 2 | The second at which the component should snap the image at. |
+| **thumbnailHandler** | **func** | | Callback function that takes in **thumbnail** url as an argument |
+| **width** | **int** | | Resize thumbnail to specified width |
+
+*Note: The longer the snapshotAtTime, the more video data it may have to download.
 
 ## Examples
 

@@ -2,7 +2,6 @@
   "name": "react-thumbnail-generator",
   "version": "0.1.0",
   "main": "src/index.js",
-  "private": true,
   "description": "Create a thumbnail by providing a video url",
   "author": "brothatru",
   "license": "ISC",
