@@ -46,6 +46,7 @@ import VideoThumbnail from 'react-video-thumbnail'; // use npm published version
 | **snapshotAtTime** | **int** | 2 | The second at which the component should snap the image at. |
 | **thumbnailHandler** | **func** | | Callback function that takes in **thumbnail** url as an argument |
 | **width** | **int** | | Resize thumbnail to specified width |
+| **mimeType** | **string** | image/png |Type of image that will be generated | 
 
 *Note: The longer the snapshotAtTime, the more video data it may have to download.
 
