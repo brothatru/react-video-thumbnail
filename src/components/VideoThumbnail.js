@@ -36,6 +36,7 @@ export default class VideoThumbnail extends React.Component {
             snapshotAtTime: props.snapshotAtTime,       // number
             thumbnailHandler: props.thumbnailHandler,   // callback function
             videoUrl: props.videoUrl,                   // string
+            mimeType: props.mimeType,                   // string
         }
     }
 
@@ -117,7 +118,7 @@ export default class VideoThumbnail extends React.Component {
      */
     getSnapShot = () => {
         try {
-            const { width, height } = this.props;
+            const { width, height, mimeType } = this.props;
             const video = this.refs.videoEl;
             const canvas = this.refs.canvas;
             canvas.height = video.videoHeight;
@@ -130,7 +131,7 @@ export default class VideoThumbnail extends React.Component {
                 canvas.getContext('2d').drawImage(video, 0, 0, width, height);
             }
 
-            const thumbnail = canvas.toDataURL('image/png');
+            const thumbnail = canvas.toDataURL(mimeType);
 
             // Remove video & canvas elements (no longer needed)
             video.src = "";  // setting to empty string stops video from loading
@@ -163,6 +164,7 @@ VideoThumbnail.propTypes = {
     snapshotAtTime: PropTypes.number,
     thumbnailHandler: PropTypes.func,
     videoUrl: PropTypes.string.isRequired,
+    mimeType: PropTypes.string,
 }
 
 /**
@@ -172,4 +174,5 @@ VideoThumbnail.defaultProps = {
     cors: false,
     renderThumbnail: true,
     snapshotAtTime: 2,
+    mimeType: "image/png",
 }
